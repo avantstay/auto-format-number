@@ -1,0 +1,13 @@
+{
+  "name": "auto-format-number",
+  "version": "1.0.0",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf build && tsc"
+  },
+  "dependencies": {
+    "typescript": "^3.3.3333"
+  }
+}

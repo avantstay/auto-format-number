@@ -48,9 +48,3 @@ export const shortFormatCurrency = (
 export const shortFormatPercentage = (n: number) => {
   return `${shortFormatNumber(Math.abs(n))}%`
 }
-
-console.log(shortFormatNumber(1093734.0083066323))
-console.log(shortFormatNumber(109373.0083066323))
-console.log(shortFormatNumber(10937.0083066323))
-console.log(shortFormatNumber(1093.0083066323))
-console.log(shortFormatNumber(109.0083066323))

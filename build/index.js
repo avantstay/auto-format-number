@@ -9,11 +9,12 @@ var Currency;
     Currency["EUR"] = "EUR";
     Currency["BRL"] = "BRL";
 })(Currency = exports.Currency || (exports.Currency = {}));
+var tenLog = Math.log(10);
 exports.shortFormatNumber = function (n) {
     var absNumber = Math.abs(n);
     if (absNumber < 1000) {
-        var fractionDigits = 2 - Math.floor(Math.log(absNumber) / Math.log(10));
-        var maxFractionDigits = Math.min(1, fractionDigits);
+        var fractionDigits = 2 - Math.floor(Math.log(absNumber) / tenLog);
+        var maxFractionDigits = Math.min(2, fractionDigits);
         return new Intl.NumberFormat('en-US', {
             maximumFractionDigits: maxFractionDigits,
         }).format(n);

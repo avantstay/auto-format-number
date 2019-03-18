@@ -8,12 +8,15 @@ export enum Currency {
   BRL = 'BRL',
 }
 
+const tenLog = Math.log(10)
+
 export const shortFormatNumber = (n: number): string => {
   const absNumber = Math.abs(n)
 
   if (absNumber < 1000) {
-    const fractionDigits = 2 - Math.floor(Math.log(absNumber) / Math.log(10))
-    const maxFractionDigits = Math.min(1, fractionDigits)
+    const fractionDigits = 2 - Math.floor(Math.log(absNumber) / tenLog)
+    const maxFractionDigits = Math.min(2, fractionDigits)
+
     return new Intl.NumberFormat('en-US', {
       maximumFractionDigits: maxFractionDigits,
     }).format(n)
@@ -32,7 +35,8 @@ export const longFormatNumber = (n: number) => {
   }).format(n)
 }
 
-export const shortFormatCurrency = (n: number, currency: Currency = Currency.USD) => {
+export const shortFormatCurrency = (
+  n: number, currency: Currency = Currency.USD) => {
   const prefix = currency === Currency.USD ? '$' : ''
   const suffix = currency === Currency.USD ? '' : `${currency}`
 
@@ -44,3 +48,9 @@ export const shortFormatCurrency = (n: number, currency: Currency = Currency.USD
 export const shortFormatPercentage = (n: number) => {
   return `${shortFormatNumber(Math.abs(n))}%`
 }
+
+console.log(shortFormatNumber(1093734.0083066323))
+console.log(shortFormatNumber(109373.0083066323))
+console.log(shortFormatNumber(10937.0083066323))
+console.log(shortFormatNumber(1093.0083066323))
+console.log(shortFormatNumber(109.0083066323))

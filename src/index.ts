@@ -9,8 +9,8 @@ export enum Currency {
 }
 
 export const shortFormatNumber = (number: number): string => {
+  const absNumber = Math.abs(number);
   const formatNumber = (n: number): string => {
-    if (n < 1e3) return n.toString();
     if (n >= 1e3 && n < 1e6) return +(n / 1e3).toFixed(1) + "k";
     if (n >= 1e6 && n < 1e9) return +(n / 1e6).toFixed(1) + "mi";
     if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + "bi";
@@ -18,7 +18,9 @@ export const shortFormatNumber = (number: number): string => {
     return format.shorten.format(n);
   };
 
-  return number < 0 ? "-" + formatNumber(-1 * number) : formatNumber(number);
+  return absNumber < 0
+    ? "-" + formatNumber(-1 * absNumber)
+    : formatNumber(absNumber);
 };
 
 export const longFormatNumber = (number: number) => {
@@ -38,5 +40,5 @@ export const shortFormatCurrency = (
 };
 
 export const shortFormatPercentage = (number: number) => {
-  return format.percentage.format(number);
+  return format.percentage.format(Math.abs(number));
 };

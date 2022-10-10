@@ -7,6 +7,7 @@ export default {
     //@ts-ignore
     notation: "compact",
     compactDisplay: "short",
+    maximumFractionDigits: 2,
   }),
   percentage: new Intl.NumberFormat("en-US", {
     style: "percent",

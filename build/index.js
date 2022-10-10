@@ -14,9 +14,8 @@ var Currency;
     Currency["BRL"] = "BRL";
 })(Currency = exports.Currency || (exports.Currency = {}));
 var shortFormatNumber = function (number) {
+    var absNumber = Math.abs(number);
     var formatNumber = function (n) {
-        if (n < 1e3)
-            return n.toString();
         if (n >= 1e3 && n < 1e6)
             return +(n / 1e3).toFixed(1) + "k";
         if (n >= 1e6 && n < 1e9)
@@ -27,7 +26,9 @@ var shortFormatNumber = function (number) {
             return +(n / 1e12).toFixed(1) + "tri";
         return format_1.default.shorten.format(n);
     };
-    return number < 0 ? "-" + formatNumber(-1 * number) : formatNumber(number);
+    return absNumber < 0
+        ? "-" + formatNumber(-1 * absNumber)
+        : formatNumber(absNumber);
 };
 exports.shortFormatNumber = shortFormatNumber;
 var longFormatNumber = function (number) {
@@ -44,6 +45,6 @@ var shortFormatCurrency = function (number, currency) {
 };
 exports.shortFormatCurrency = shortFormatCurrency;
 var shortFormatPercentage = function (number) {
-    return format_1.default.percentage.format(number);
+    return format_1.default.percentage.format(Math.abs(number));
 };
 exports.shortFormatPercentage = shortFormatPercentage;

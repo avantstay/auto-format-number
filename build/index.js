@@ -45,6 +45,6 @@ var shortFormatCurrency = function (number, currency) {
 };
 exports.shortFormatCurrency = shortFormatCurrency;
 var shortFormatPercentage = function (number) {
-    return format_1.default.percentage.format(Math.abs(number));
+    return "".concat((0, exports.shortFormatNumber)(number), "%");
 };
 exports.shortFormatPercentage = shortFormatPercentage;

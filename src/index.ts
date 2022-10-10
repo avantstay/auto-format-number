@@ -40,5 +40,5 @@ export const shortFormatCurrency = (
 };
 
 export const shortFormatPercentage = (number: number) => {
-  return format.percentage.format(Math.abs(number));
+  return `${shortFormatNumber(number)}%`;
 };

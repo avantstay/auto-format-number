@@ -25,7 +25,7 @@ export const shortFormatNumber = (n: number): string => {
   const reduction = Math.floor(Math.log(absNumber) / Math.log(1000))
   const suffix = grands[reduction - 1] || '...' // TODO: if needed, expand this
 
-  return shortFormatNumber(n / Math.pow(1000, reduction)) + suffix
+  return (n / Math.pow(1000, reduction)) + suffix
 }
 
 export const longFormatNumber = (n: number) => {

@@ -18,9 +18,7 @@ export const shortFormatNumber = (number: number): string => {
     return format.shorten.format(n);
   };
 
-  return absNumber < 0
-    ? "-" + formatNumber(-1 * absNumber)
-    : formatNumber(absNumber);
+  return number < 0 ? "-" + formatNumber(absNumber) : formatNumber(absNumber);
 };
 
 export const longFormatNumber = (number: number) => {

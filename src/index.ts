@@ -1,50 +1,42 @@
-const grands = ['k', 'mi', 'bi', 'tri']
+import format from "./format";
 
 export enum Currency {
-  USD = 'USD',
-  AUD = 'AUD',
-  CAD = 'CAD',
-  EUR = 'EUR',
-  BRL = 'BRL',
+  USD = "USD",
+  AUD = "AUD",
+  CAD = "CAD",
+  EUR = "EUR",
+  BRL = "BRL",
 }
 
-const tenLog = Math.log(10)
+export const shortFormatNumber = (number: number): string => {
+  const absNumber = Math.abs(number);
+  const formatNumber = (n: number): string => {
+    if (n >= 1e3 && n < 1e6) return +(n / 1e3).toFixed(1) + "k";
+    if (n >= 1e6 && n < 1e9) return +(n / 1e6).toFixed(1) + "mi";
+    if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + "bi";
+    if (n >= 1e12) return +(n / 1e12).toFixed(1) + "tri";
+    return format.shorten.format(n);
+  };
 
-export const shortFormatNumber = (n: number): string => {
-  const absNumber = Math.abs(n)
+  return number < 0 ? "-" + formatNumber(absNumber) : formatNumber(absNumber);
+};
 
-  if (absNumber < 1000) {
-    const fractionDigits = 2 - Math.floor(Math.log(absNumber) / tenLog)
-    const maxFractionDigits = Math.min(2, fractionDigits)
-
-    return new Intl.NumberFormat('en-US', {
-      maximumFractionDigits: maxFractionDigits,
-    }).format(n)
-  }
-
-  const reduction = Math.floor(Math.log(absNumber) / Math.log(1000))
-  const suffix = grands[reduction - 1] || '...' // TODO: if needed, expand this
-
-  return shortFormatNumber(n / Math.pow(1000, reduction)) + suffix
-}
-
-export const longFormatNumber = (n: number) => {
-  return new Intl.NumberFormat('en-US', {
-    useGrouping: true,
-    maximumFractionDigits: 2,
-  }).format(n)
-}
+export const longFormatNumber = (number: number) => {
+  return format.longNumber.format(number);
+};
 
 export const shortFormatCurrency = (
-  n: number, currency: Currency = Currency.USD) => {
-  const prefix = currency === Currency.USD ? '$' : ''
-  const suffix = currency === Currency.USD ? '' : `${currency}`
+  number: number,
+  currency: Currency = Currency.USD
+) => {
+  const prefix = currency === Currency.USD ? "$" : "";
+  const suffix = currency === Currency.USD ? "" : `${currency}`;
 
-  return n < 0
-    ? `-${prefix}${shortFormatNumber(Math.abs(n))}${suffix}`
-    : `${prefix}${shortFormatNumber(Math.abs(n))}${suffix}`
-}
+  return number < 0
+    ? `-${prefix}${shortFormatNumber(Math.abs(number))}${suffix}`
+    : `${prefix}${shortFormatNumber(Math.abs(number))}${suffix}`;
+};
 
-export const shortFormatPercentage = (n: number) => {
-  return `${shortFormatNumber(Math.abs(n))}%`
-}
+export const shortFormatPercentage = (number: number) => {
+  return `${shortFormatNumber(number)}%`;
+};

@@ -5,7 +5,7 @@ export declare enum Currency {
     EUR = "EUR",
     BRL = "BRL"
 }
-export declare const shortFormatNumber: (n: number) => string;
-export declare const longFormatNumber: (n: number) => string;
-export declare const shortFormatCurrency: (n: number, currency?: Currency) => string;
-export declare const shortFormatPercentage: (n: number) => string;
+export declare const shortFormatNumber: (number: number) => string;
+export declare const longFormatNumber: (number: number) => string;
+export declare const shortFormatCurrency: (number: number, currency?: Currency) => string;
+export declare const shortFormatPercentage: (number: number) => string;
